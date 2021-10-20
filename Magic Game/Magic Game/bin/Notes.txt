@@ -1,0 +1,219 @@
+﻿8/7/2017: I have been recieving an error fom the Form3.cs form.  Even though everything has been added up to 100%, I still get the error message.  I am also about to try
+my first attempt to code in picture boxes.  See Form2.cs if anything goes wrong with that.  I need to fix the 100% error first.
+
+8/8/2017: The percentage error was solved, as it turns out there were errors with creating a new map (fixed because I forgot to create a new in positions.) and from form 2.
+I fixed the errors however when form2 appears, the form is blank and there should be picturesboxes. This is what you will try to remedy when you come back.  I suggest looking
+at form2.cs and making sure that each picturebox is written correctly. Start with water and then copy that code into the new land types.
+
+8/9/2017: I am getting an error that turns up the 100% error message again.  I added a new block of code to randomly add tiles into the map on map.cs.
+
+8/14/2017:  I have realized that when I need to make a big map, this takes a while.  I am deciding to implement my first progress bar.  I am noting the changes here so if
+anything goes wrong I will be able to undo the changes to form2.cs that I have listed.  First of all I added a backgroundoworker named Progo and a progress bar object named 
+show_progress.  If both of these are deleted it would be easy to be able to delete any trace of them.  Next I changed the name for the method that populates the map in form2.cs.
+If I need to regress I also added to parameters to that methode that need to be taken away if I delete the progress bar and bakcground worker.  Fourth, I added some new
+methods that report back to the progress bar to update it.  As far as problems go, the only one I have now is trying to get the backgroundwoker to run the method to 
+populate the map.  This is what I need to do research on next.  I also need to know how to make the progress bar visible.
+
+8/15/2017: I have decided to cancel the progress bar in part.  Istead I created a new form that will keep a verbal count of loaded lands via a label.  I still need a 
+background worker in order to have this work.  The loadform form is located in Form2.cs.  I also have a useful link to help create a background worker:
+https://msdn.microsoft.com/en-us/library/cc221403(v=vs.95).aspx.  Also check Form3.cs because I was messing around with adding a loadform there as well.
+
+8/18/2107: I finally have a working progress bar but now a new error appears.  The system runs out of memory and throws an error when I want to make a large map.  I need 
+to find where this memory leak is coming from.  I will figure this out the next time I work on this.
+
+8/23/2017: I am making the method that will place tiles into bodies of water.  Look at map.cs for further information.
+
+8/26/2017:  I have a prototype of the water placing algorithm in use.  It worked the first time but has been crashing ever since.  I am going to add some more console output as 
+to what is causing the out of range error to happen as then I can further assess what the problem is.
+
+8/27/2017: I was able to complete the generator for water placement however, it is so slow that I now need to find a way to optimize this.  I was thinking of when all 
+directions are unavailable, of making a pattern that spirals outward from that tile that has no direction available.
+
+9/9/2017: I got married a week ago, SO EXCITING!  Anyways, I am now able to load the maps in a randomly generated fashion.  To the best of my knowledge the game is now ready for
+memory handling in that the map now needs to be able to be saved and recreated when the continue game button is pushed.  Before doing that though, please please please Brandon
+do you documentation and organization for your exsisting files so that it will be easier to make modifications to your methods and fields in the future.  Thanks you if you
+do this, screw you if you dont. 
+
+9/17/2017: I am now working on the city class of the project.  The goal here is to create a city sprite and then be able to add cities to the map.  Right now I am just trying
+to add the sprites to the map.  After that is done, I will be able to add affiliations to each city, then it is on to creating factions an armies, I am making some progress
+now.
+
+9/17/2017:  Before you continue on anything else, the largest problem right now is that the program does not terminate when the red x button is clicked.  Make sure to add
+this for all form so that the program can be ended.
+
+9/25/2017: Along with still needed to fix the proper closing format for the forms, be sure to get rid of the one lie of space in the save map text file.  There was a problem
+with the tile placer going out of bounds but it was fixed by changing parameters of some of each for loop placer form zero to one.  I have marked those on each line.
+
+9/25/2017: Further testing shows that there is an out of range error that still occurs when the map is being built.  I will need to take time to fix this.  After that is
+done, refer to the entry before this one.
+
+10/11/2017: I am creating a new land number generator from scrath.  I am currently at the part where each seed tile is being placed.  I have an array where the coordinates for
+each current are placed beginning with each seed. I need to create a new row for land types of each seed.
+
+10/12/2017: I am currently at the point where directions are being checked to make sure they are or are not available.  First make a clause if no directions are available.
+After you finish the generator, work on making it so the program closes when the red x is pushed.
+
+10/12/2017:  The code for the tile placer has been written.  I am getting an out of bounds error in the directional tile placer in step three. I will need to find which 
+array is going out of bounds since a few arrays are handled in this way.  Also test rand with a message box at the beginning of the directional tile placer to see if 
+the directions range from 0 to 3 or from 0 to 2.
+
+10/15/2017: I have been able to make it so the program closes when the 'X' button is pushed on any form.  I also made it so an out of range exception wont be triggered.  I 
+can now go ahead and try to make cities spawn in the map.  I also want to change the mountain sprite, it does not fit in with the rest of the backgrounds.
+
+10/16/2017:  Before I change the mountain sprite, I want to make it so I can load a map by clicking the 'continue game' button.  I am currently trying to get that to
+work.
+
+10/16/2017: I have finished my work on the "Save game" and "continue game" buttons.  I have also changed the mountain sprite.  The next thing I am working on is the add
+city button on form2.  The conflict comes with the termination functions triggering when the form to get city coordinates comes up.
+
+10/17/2017:  Now that I have the add a city button showing up and working I need to add a few things to it.  I need to make it so cities only show up within the map, I need
+to make sure to add a control to name each city, and I need to make sure that the location of each city is stored somewhere.  After all of this I will be adding the cities 
+to the save game button and then it will be on to factions.  When I do factions remember to go back and put the faction that each city belongs to.
+
+10/18/2017: I added some of the stuff from the previous entry when I had two thoughts.  I need to add commentary for all of the pieces of my code so that it will be easier
+to work on if I take a break, and I need to make the list of cities a part of the map class instead of the form2 class.  I will be working on this the next time I am here.
+Refer to previous entry when finished with these two tasks.
+
+10/18/2017: I have finished the two things I needed to work on.  I have also been able to name cities.  The thing to do now is to make is so when I load a saved game, the
+cities load into the map.  I am right now, half way done with this.  I made it so when save game is pressed, the cities load their info into a text file, I am now working
+on getting that text info onto the map.  I took away the try catch blocks for this so some new exeption handling needs to be added when I am done.  Also the city sprites 
+are a tad askew when placed on the map, work on that too.
+
+10/18/2017:  I have begun work on factions.  Make sure to try out the new menu options on the form2. After that work on organizing the menu more.
+
+10/19/2017: Go to Form2 to work on the transfer of info from cites and the factions that own them.  If something goes wrong, look at form2 at add city form.
+
+10/19/2017:  I am currently trying to make a smooth addition of informaton between the cities and factions.  Each faction will have a list of cities they own and each city 
+will contain a faction that owns it.  Right now I am getting an error when I try to put the name of a faction into a city.  It sometimes comes up with the wrong faction.
+This is follows by a crash the next time I try to look at the list of all factions.  This leads me to believe that somewhere there is a out of range error being thrown.  
+The next time I will be looking at the menu options in form2 and deducing where the error is and fixing it.
+
+10/20/2017: I fixed the display bug mentioned in the last entry.  I also took away the list of cities each faction owns.  I found that list to be redundant since each city
+already has the name of each faction that owns it.  If need be I could just traverse the list of cities and find what I need there.  The two things I want to work on next
+are adding a save option for factions and to update the city save so that each owning faction in included in the save.  Also find out how to deallocate data in c#.  If any
+memory problems happen check to end of the function in form2.cs where you add a city to the map.  I made it so local memory I allocated is set to null at the end of the 
+function, I wanted to see if that would work.
+
+10/23/2017:  I have gotten to the point where I can start working on armies.  I need to add all of the sigils to the resources and them determine size and such of each sigil.
+I also started working on form2 for adding armies by creating a new region for moving armies and a new function for adding armies to the map.  First things is first, work on
+the design of each sigil until you ware good with adding them to the map.
+
+10/23/2017: I have added the sigils for each faction. Make adjustments are neccessarry.  Also I need to make code for the button that adds an army to the map with parameters
+on where the army can be placed. I also need to make a form for armies to add the map and to make it so when an army is placed, it is placed on top of a city.
+
+10/24/2017: I added victories and defeats to the factios class as well as made it so it saves and loads with the faction save file.  I am now working on a click event
+handler for when armies are to be added to the map.  When the user clicks a city it will add an army of that faction to the map.  The problem is I need the coordinates of
+the city to be passed when the user clicks on the city but I do not know how to do this through a click event handler.  Ill find out the next time I work on this.
+
+10/25/2017: I added two functions to check for duplicates of added factions or cities.  I also made it so the option menu appears for each city.  The next thing to do is
+program each button to add health to any allied army within one block of the city and to create new armies. I am also tring to make a grid for the map but the labels
+are not transparent, I need to find out how to fix this.
+
+10/25/2017: I was able to add an army to the map however an error occurrs.  When gold if subtracted from the faction, it is subtracted in only that instance of a city, meaning
+if a faction has two cities and I buy an army in one, the other city think that the faction still has the same amount of money.
+
+10/26/2017: I found out what caused the error from the previous entry, the load function in form one was making a new faction for each city.  Now I am getting an exception
+when I try to save the armies onto a text file.  It says there is a object disposed exception so I will try to fix that the next time.
+
+10/27/2017: I am now able to get armies to move.  They can move from spot to spot.  The new problem now is when I try to open a menu for moving the army.  It shows up
+minimized, I need to find a way to fix that. 
+
+10/27/2017: The new problem now is every time I create a new army, its allied armies do not consider it an ally for some reason even though the faction ID numbers are the
+same.  This only seems to happen when a new army is created.  Also make it so each form auto adjusts to fit all of its informaton.
+
+10/28/2017: I added the battle form to the game.  The font on the titles of each army still needs to be adjusted but it seems to be working well otherwise.  I also solved
+the issue in the previous entry.  Before working on the battle form make sure to get the heal button to work before proceeding.
+
+10/28/2017:  I am now working on the battle form.  Curently it is contain to the move north thing but we will see where it goes.  Work on that next time.
+
+10/30/2017: I made fixed a bug involing the army numbers and them resetting when armies are destroyed.  I am also programming a button that will destroy both teams in a battle
+The problem now is tht too many armies are being deleted.
+
+10/30/2017: I now need to program the rest of the buttons for the battle thing.  Work on those next.
+
+10/30/2017: What I did was finish the battle buttons, I need to test everyting right now.  If I get no errors, then I would like to add a faction standin button on form 2
+and then I can start on the mechanics for each turn.
+
+10/31/2017: I am now working on the turn tracker for the game.  When you click on the each army or city, make sure it will only show up when the id of player tracker is the
+same as the army or city you click.
+
+10/31/2017:  This game is ready for alpha testing. Place anything you want to improve here.  There should be lots.
+
+11/1/2017:  Today I optimized the land of the game by pushing all of the land grid into a single image rather than several individual picture boxes.
+
+11/2/2017:  Trying to make each row a single label for the grid, having trouble aligning text.
+
+11/3/2017:  Turned grid into one picture so now the grid can be rendered as one image.  I will now work on two things, the error when a new saved game is created, and a
+permanent faction statistics text file for faction records.  I should also work on saving paths to be more dynamic.  Also try the new save and load files for the 
+permanent faction statitics.
+
+11/4/2017: List of things to work on:
+1. The glitch where when you start a new game and save, the game crahses.
+2. Shift the files so that the faction files does not reset with every new game except for money.
+3. Have a drop down text box for the factions.
+4. Create a total wins variable for each faction.
+
+11/4/2017: I am working to have a list apprear in the faction adding form for the user to choose from the factions to add to.  Right now work on the form 2 implementation of
+this form and the class for the form itself.
+
+11/5/2017: I started to work on a list of all of the factions that are still available to add to a game.  the problem is, when a faction is added to the game, it still
+shows up as available to add, I need to fix that.
+
+11/6/2017: I am having touble savig the game when all factions have been added to the game, fix that.
+
+11/6/2017: when I turn the grid on, all of the cities are disappearing until the grid is turned off.  
+
+11/6/2017: Cities are not showing up on larger coordinates.  I found out this was because the form sets new things from a certain number of pixels for current view.  
+This will make the form largers and larger as you build.  As such we need to prevent the form from getting bigger and we need to lock pixels. Check this link:
+https://stackoverflow.com/questions/1330339/prevent-users-from-resizing-the-window-form-size.
+
+11/7/2017: Add to the city creation form the name of the faction who's turn it is and how much money they have.  Also there is a problem with equipment, as soon as one
+faction buys something, it also gives that equipment to the rest of the factions.
+
+11/8/2017: Idea!  If a faction wants to build a city on a forest of mountain, it costs 125G or 150G instead of 100.  I have tracked the problem from the previous entry to
+either the save file or the end turn file.  When I save the game after the end of the turn of the army that bought somehting, it gives the rest of the armies those things 
+as well.  I suspect that the save file is to blame but the bug is either there or the end turn function in form2.cs
+
+11/8/2017: Work on the block of code on Form2.cs where it costs extra to build on mountains and forests.  I put a comment on the area where I am supposed to work.
+
+11/8/2017: I am now beta testing the game, will update when more errors appear. I also finished the sprites for each faction army.
+1.When I go to see the list of all cities I end up with an infinite loop of message boxes.
+
+11/13/2017:  I have consolidated all of the battle code into one function.  I am now working on labeling all of my code and trying to create more optimized code as I go.
+
+11/13/2017: I am now working on saving multiple games at at time, I am thinking of adding a seperation line, something along the lines of a random line that saves the 
+different game elements in a different location.  I have made a form for choosing a load game, the next thing to do is sucessfully load a different game and be able to
+name each save file whatever is wanted.    Line:  -----------------------||||Name||||----------------------  for each seperation of save file.
+
+1/8/2018: I am picking up the game on my new computer.  I need to find a way to make the path files more compatable with other computers.  Also
+I am having trouble starting a new game.  The new loading screen wont go away.  Look in the function for pressing the "OK" button in form3.
+Also I have done some tweeking to make it so each army can move three paces instead of one.  I still needs to take one move away when a 
+amry moves and to set the default number of moves to three.
+
+1/10/2018: I have be able to complete all loading/saving problems regarding file location. I have also made is so an army have move up to
+three time per turn.  Next I need to work on updating the the moving army form to list how many moves an army has left.  To do this, I
+have added to the move army constructor to that it takes in a new parameter, however I may be able to reverse this because I am pretty sure
+the moving army is already a parameter.  Scratch that, it has been fixed.  Next I need to add the three new faction for goblins, merfolk, and
+elves.
+
+1/12/2018: I added a feature to each city that allows each city to increase its gold production by one, with increasing cost for each level.
+Next I need to work on the elf sigil.
+
+1/12/2018:  I need to work on a form2 option to location each army for whoever's turn it is.  I want to make a similar model to the city
+location option in form to, I also need to make a key binding for this new option as well.
+
+1/12/2018: The next thing I need to work on is making it so when a battle happens, the victor and loser are recorded in the permanent faction
+record.  To do this I was thinking of manipulating the file in the battle function after a battle takes place.  This way I can see the win 
+and loss rates of each faction over all three games.
+
+1/12/2018:  I have made it so I can now add all battles to the permanent faction file.  I now need to work on the percentage win rate on 
+the faction.cs file.  I need to make it so when the number of victories and defeats are the same, it says 100% instead of 0%.
+
+1/22/2018: I am now working on a tournament mode, like I used to do.  So far I have made it so the factions are randomly assigned.  I now need to make it so
+those factions show up on the form, with a scroll bar to see the tournament.
+
+1/28/2018:  The matchup generator has been completed but the picture of the bracket is not showing up.  
+
+1/29/2018:  I need to create a label generator to put the labels of each pair next to them for each round of the tournament.
+
+1/29/2017: I am having trouble getting everything to line up when starting a new round.

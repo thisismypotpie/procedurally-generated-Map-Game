@@ -1,0 +1,25 @@
+a_0_0_Auxilux Militia_0_2
+b_1_0_Azorius Senate_0_2
+c_2_0_Boros Legion_0_2
+d_3_0_House Dimir_0_2
+e_4_0_Drogskol Cluster_0_2
+f_5_0_Drohl-Tide Cabal_0_2
+g_6_0_Firefolk Outcasts_0_2
+h_7_0_Glint-Leaf Federation_0_2
+i_8_0_Golgari Swarm_0_2
+j_9_0_Gruul Clans_0_2
+k_0_1_The Howlpack Alliance_0_1
+l_1_1_Hruktar Coalition_0_1
+m_2_1_Immurtuis Hoarde_0_1
+n_3_1_Izzet League_0_1
+o_4_1_Lex Imperium Collective_0_1
+p_5_1_Nimium Followers_0_1
+q_6_1_Orzhov Syndicate_0_1
+r_7_1_Parcorium Mass_0_1
+s_8_1_Phyrexian Hivemind_0_1
+t_9_1_Rakdos Cult_0_1
+u_0_2_Roxveard Rebels_0_1
+v_1_2_Selesnya Conclave_0_1
+w_2_2_Simic Combine_0_1
+x_3_2_Vallatus Stampede_0_1
+y_4_2_Zeplitor Underground_0_1

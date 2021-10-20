@@ -1,0 +1,730 @@
+﻿ /*
+         This class will populate the land map matrix.  
+         NOTE: plains tiles are calculated by subtracting the total number of water, mountain, and forest.
+         */
+        private void populate_number_map()
+        {
+            int total_tiles = width * height;//total number of tiles on the map.
+            int tiles_of_water = Convert.ToInt32((((float)percent_water/100)*(float)total_tiles));//converts the total percentage of water into the number of tiles for the map.
+            int tiles_of_mountains = Convert.ToInt32((((float)percent_mountain / 100) * (float)total_tiles));//converts the total percentage of mountains into the number of tiles for the map.
+            int tiles_of_forest =  Convert.ToInt32((((float)percent_forest / 100) * (float)total_tiles));//converts the total percentage of forests into the number of tiles for the map.
+            int tiles_of_plains =total_tiles - tiles_of_water-tiles_of_mountains-tiles_of_forest;//calculates the total number of plains tiles.
+            //MessageBox.Show("Total tiles: " + total_tiles.ToString() + "\n" + "Water tiles: " + tiles_of_water.ToString() + "\n" + "Plains tiles: " + tiles_of_plains.ToString() + "\n" + "Mountains tiles: " + tiles_of_mountains.ToString() + "\n" + "Forest Tiles: " + tiles_of_forest.ToString());
+            int water_left = tiles_of_water ; //this is the number of tiles of water remaining to be placed on the map.
+            int mountains_left = tiles_of_mountains;//the number of tiles of mountains remaining to be placed on the map.
+            int forest_left = tiles_of_forest;//the number of tiles of forest remaining to be placed on the map.
+            Random rand = new Random();//Used to pick a random number when selecting a random position for body seeds and for selecting the body to add to for each next tile.
+            Random rand2 = new Random();//Used to pick a direction to add the next tile to a body of terrian.
+            int x = 0;//X-Coordinate for body seed chosen at random.
+            int y = 0;//Y-Coordinate for body seed chosen at random.
+            int bodies_of_water = 0;//number of bodies of water on the map.
+            int mountain_ranges = 0;//number of mountain ranges on the map.
+            int clusters_of_forests = 0;//number of forest clusters on the map.
+            int next_tile_placed = 0;//Body of terrian chosen for the next tile placement.
+            int direction_chosen_for_next_tile = 0;//Direction chosen, this int will be between 1 and 4, each coordinating with a different direction.
+            bool up = false;//Lets the function know if the up direction for the current tile placement is available.
+            bool left = false;//lets the function know if the left direction for the current tile placement is available.
+            bool right = false;//lets the function know if the right direction for the current tile placement is available.
+            bool down = false;//lets the function know if the down direction for the current tile placement is available.
+            
+            /*The following four bools were created in the even that all four direction are unavailable for adding a tile.  In that event, the program will see which directions
+            were only unavailable due to a spot being taken.  In this even the current tile will move to one of these spots and begin the cycle again.*/
+            bool up_direction_taken = false;//lets the function know if the up direction for the current tile is taken.
+            bool down_direction_taken = false;//lets the function know if the down direnction for the current tile is taken.
+            bool left_direction_taken = false;//lets the function know if the left direction for the current tile is taken.
+            bool right_direction_taken = false;//lets the function know if the right direction for the current tile is taken.
+            
+            /*
+             The following four integers are given based on the number of directions the next tile can be placed.  There could be up to four available directions.
+             */
+            int up_num = 0;//the number given to the up direction if the up direction is available.
+            int right_num = 0; //the number given to the right direction if the right direction is available.
+            int down_num = 0;//the number given to the down direction if the down direction is available.
+            int left_num = 0;//the number given to the left direction if the left direction is available.
+            
+            int directions_available = 0;//total number of directions available from current placement tile.
+
+            /*These for loops denote a new body of water, mountain range , and forest created for each 20% of them on the map.
+            If all goes well, this should make a new body for every twenty percent a new body is formed.*/
+            while((bodies_of_water*20) < percent_water)
+            {
+                bodies_of_water++;
+            }
+            int [,]bodies_of_water_coordinates = new int [bodies_of_water,2];//for the secong coordinate, 0 is the x-coordiate and 1 is the y-coordinate.
+            while((mountain_ranges*20) < percent_mountain)
+            {
+                mountain_ranges++;
+            }
+            int [,]mountain_ranges_coordinates = new int [mountain_ranges,2];
+            while((clusters_of_forests*20) < percent_forest)
+            {
+                clusters_of_forests++;
+            }
+            int[,] clusters_of_forests_coordinates = new int[clusters_of_forests, 2];
+           // MessageBox.Show("Bodies of water: " + bodies_of_water.ToString() + "\n" + "Mountain Ranges: " + mountain_ranges.ToString() + "\n" + "Cluster of Forests: " + clusters_of_forests.ToString());
+
+
+            //Here is where the seed tile for each body of water will go.
+            for (int i = 0; i < bodies_of_water; i++ )
+            {
+                x = rand.Next(0,width);//If there is an out of range error, check here or the next line.
+                y = rand.Next(0,height);
+                while(positions[x,y] !=null)//if land id is zero, that means the land has not been assigned a land type.
+                {
+                    x = rand.Next(0,width);
+                    y = rand.Next(0,height);
+                }
+                positions[x, y] = new Land(1);
+                ////Console.Out.Writeline("Creating new land at position: " + x.ToString() + ","+y.ToString());//writing to console here.
+                bodies_of_water_coordinates[i, 0] = x;
+                bodies_of_water_coordinates[i, 1] = y;
+                --water_left;
+                ////Console.Out.Writeline(water_left.ToString() + " out of " + tiles_of_water.ToString()+" tiles of water remaining.");//writig to console here.
+                
+            }
+
+            /*
+             The following while loop will generate the positions of each water tile.  This is done in such a way that water tiles are not placed randomly throughout the map.
+             */
+            LoadForm water_load = new LoadForm(tiles_of_water - 1, "Water");//Using a load form to track the progress of each tile of water as its positions are determined.
+            while(water_left !=0)
+            {
+                next_tile_placed = rand.Next(0,bodies_of_water);//Picks a random body of water to add the next tile to.
+                //Console.Out.Writeline("Body of water: " + (next_tile_placed+1).ToString() + " out of " + bodies_of_water.ToString()+" chosen for next tile placement.");
+                //will check to see if a tile can be placed in the upward direction.
+/*switched zero to one*/if(bodies_of_water_coordinates[next_tile_placed,1] > 1)//makes sure that the next tile placed x-coordinate is greater than zero
+                {
+                    if (positions[bodies_of_water_coordinates[next_tile_placed, 0], bodies_of_water_coordinates[next_tile_placed, 1]-1] == null)//makes sure the chosen positions is null.
+                    {
+                        up = true;
+                        //Console.Out.Writeline("Up location is possible at coordinates: " + bodies_of_water_coordinates[next_tile_placed, 0].ToString() + "," + (bodies_of_water_coordinates[next_tile_placed, 1] - 1).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: "+bodies_of_water_coordinates[next_tile_placed,0].ToString() +","+(bodies_of_water_coordinates[next_tile_placed,1]-1).ToString()+" invalid.  Spot already taken.");
+                        up_direction_taken = true;
+                    }
+                }
+                else
+                {
+                    //Console.Out.Writeline("Coordinates: "+ bodies_of_water_coordinates[next_tile_placed,0].ToString()+","+(bodies_of_water_coordinates[next_tile_placed,1]-1).ToString()+" invalid.  Out of range. Under Bounds");
+                }
+
+                //will check to see if a tile can be placed in the downward direction.
+                if(bodies_of_water_coordinates[next_tile_placed,1] < height-1)
+                {
+                    if(positions[bodies_of_water_coordinates[next_tile_placed,0],bodies_of_water_coordinates[next_tile_placed,1]+1]==null)
+                    {
+                        down = true;
+                        //Console.Out.Writeline("Down location is possible at coordinates: " + bodies_of_water_coordinates[next_tile_placed, 0].ToString() + "," + (bodies_of_water_coordinates[next_tile_placed, 1] + 1).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + bodies_of_water_coordinates[next_tile_placed, 0].ToString() + "," + (bodies_of_water_coordinates[next_tile_placed, 1] + 1).ToString() + " invalid.  Spot already taken.");
+                        down_direction_taken = true;
+                    }
+                }
+                else
+                {
+                    //Console.Out.Writeline("Coordinates: " + bodies_of_water_coordinates[next_tile_placed, 0].ToString() + "," + (bodies_of_water_coordinates[next_tile_placed, 1] + 1).ToString() + " invalid.  Out of range. Over bounds.");
+                }
+
+                //will check to see if a tile can be placed in the leftward direction.
+/*Switched zero to one*/if(bodies_of_water_coordinates[next_tile_placed,0] > 1)
+                {
+                    if(positions[bodies_of_water_coordinates[next_tile_placed,0]-1,bodies_of_water_coordinates[next_tile_placed,1]]==null)
+                    {
+                        left = true;
+                        //Console.Out.Writeline("Left location is possible at coordinates: " + (bodies_of_water_coordinates[next_tile_placed, 0]-1).ToString() + "," + (bodies_of_water_coordinates[next_tile_placed, 1]).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + (bodies_of_water_coordinates[next_tile_placed, 0]-1).ToString() + "," + bodies_of_water_coordinates[next_tile_placed, 1].ToString() + " invalid.  Spot already taken.");
+                        left_direction_taken = true;
+                    }
+                }
+                else
+                {
+                    //Console.Out.Writeline("Coordinates: " + (bodies_of_water_coordinates[next_tile_placed, 0] - 1).ToString() + "," + bodies_of_water_coordinates[next_tile_placed, 1].ToString() + " invalid.  Out of range. Under bounds.");
+                }
+
+
+                //will check to see if a tile can be placed in the rightward direction.
+                if(bodies_of_water_coordinates[next_tile_placed,0] < width - 1)
+                {
+                    if(positions[bodies_of_water_coordinates[next_tile_placed,0]+1,bodies_of_water_coordinates[next_tile_placed,1]]==null)
+                    {
+                        right = true;
+                        //Console.Out.Writeline("Right location is possible at coordinates: " + (bodies_of_water_coordinates[next_tile_placed, 0] + 1).ToString() + "," + (bodies_of_water_coordinates[next_tile_placed, 1]).ToString());
+
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + (bodies_of_water_coordinates[next_tile_placed, 0] + 1).ToString() + "," + bodies_of_water_coordinates[next_tile_placed, 1].ToString() + " invalid.  Spot already taken.");
+                        right_direction_taken = true;
+                    }
+                }
+                else
+                {
+                    //Console.Out.Writeline("Coordinates: " + (bodies_of_water_coordinates[next_tile_placed, 0] + 1).ToString() + "," + bodies_of_water_coordinates[next_tile_placed, 1].ToString() + " invalid.  Out of range. Over bounds.");
+                }
+
+                //the following blocks will decide which directions are available and give each direction a number if it is.  Rand2 will then select at random from the numbers
+                //to see which direction the new block will be placed in.  If something more effecient becomes available I will replace this whole method however, this is as
+                // random as I know how to get for the time being.
+                if(up == true)
+                {
+                    directions_available++;
+                    up_num = directions_available;
+                    //Console.Out.Writeline("up number is: "+up_num.ToString());
+                }
+                if(right == true)
+                {
+                    directions_available++;
+                    right_num = directions_available;
+                    //Console.Out.Writeline("right number is: "+right_num.ToString());
+                }
+                if(down == true)
+                {
+                    directions_available++;
+                    down_num = directions_available;
+                    //Console.Out.Writeline("down number is: "+down_num.ToString());
+                }
+                if(left == true)
+                {
+                    directions_available++;
+                    left_num = directions_available;
+                    //Console.Out.Writeline("left number is: "+ left_num.ToString());
+                }
+                if (up == false && down == false && left == false && right == false)
+                {
+                    //Console.Out.Writeline("All direction are unavailable.");
+                    directions_available = 0;
+                    up_num = 0;
+                    down_num = 0;
+                    right_num = 0;
+                    left_num = 0;
+                    if (up_direction_taken == true)
+                    {
+                        directions_available++;
+                        up_num = directions_available;
+                    }
+                    if (down_direction_taken == true)
+                    {
+                        directions_available++;
+                        down_num = directions_available;
+                    }
+                    if (left_direction_taken == true)
+                    {
+                        directions_available++;
+                        left_num = directions_available;
+                    }
+                    if (right_direction_taken == true)
+                    {
+                        directions_available++;
+                        right_num = directions_available;
+                    }
+                    direction_chosen_for_next_tile = rand2.Next(1,directions_available+1);
+                    if(direction_chosen_for_next_tile == up_num)
+                    {
+                        bodies_of_water_coordinates[next_tile_placed,1] = bodies_of_water_coordinates[next_tile_placed,1]-1;
+                    }
+                    if(direction_chosen_for_next_tile == down_num)
+                    {
+                        bodies_of_water_coordinates[next_tile_placed, 1] = bodies_of_water_coordinates[next_tile_placed, 1] + 1;
+                    }
+                    if(direction_chosen_for_next_tile == left_num)
+                    {
+                        bodies_of_water_coordinates[next_tile_placed,0] = bodies_of_water_coordinates[next_tile_placed,0]-1;
+                    }
+                    if(direction_chosen_for_next_tile == right_num)
+                    {
+                        bodies_of_water_coordinates[next_tile_placed, 0] = bodies_of_water_coordinates[next_tile_placed, 0] + 1;
+                    }
+                }
+                else//This else was created in the event that all direction are unavilable, this will be skipped.
+                {
+                    //this block will make a randomly generated number with a valid direction and them assign that to the map.
+                    direction_chosen_for_next_tile = rand2.Next(1, directions_available + 1);
+                    //Console.Out.Writeline("Number chosen for dirention: " + direction_chosen_for_next_tile.ToString());
+                    if (direction_chosen_for_next_tile == up_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in up direction.");
+                        positions[bodies_of_water_coordinates[next_tile_placed, 0], bodies_of_water_coordinates[next_tile_placed, 1] - 1] = new Land(1);
+                        bodies_of_water_coordinates[next_tile_placed, 1] = bodies_of_water_coordinates[next_tile_placed, 1] - 1;
+                        --water_left;
+                        //Console.Out.Writeline(water_left.ToString() + " out of " + tiles_of_water.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == right_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in right direction.");
+                        positions[bodies_of_water_coordinates[next_tile_placed, 0] + 1, bodies_of_water_coordinates[next_tile_placed, 1]] = new Land(1);
+                        bodies_of_water_coordinates[next_tile_placed, 1] = bodies_of_water_coordinates[next_tile_placed, 0] + 1;
+                        --water_left;
+                        //Console.Out.Writeline(water_left.ToString() + " out of " + tiles_of_water.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == down_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in down direction.");
+                        positions[bodies_of_water_coordinates[next_tile_placed, 0], bodies_of_water_coordinates[next_tile_placed, 1] + 1] = new Land(1);
+                        bodies_of_water_coordinates[next_tile_placed, 1] = bodies_of_water_coordinates[next_tile_placed, 1] + 1;
+                        --water_left;
+                        //Console.Out.Writeline(water_left.ToString() + " out of " + tiles_of_water.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == left_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in left direction.");
+                        positions[bodies_of_water_coordinates[next_tile_placed, 0] - 1, bodies_of_water_coordinates[next_tile_placed, 1]] = new Land(1);
+                        bodies_of_water_coordinates[next_tile_placed, 1] = bodies_of_water_coordinates[next_tile_placed, 0] - 1;
+                        --water_left;
+                        //Console.Out.Writeline(water_left.ToString() + " out of " + tiles_of_water.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else
+                    {
+
+                    }
+                    water_load.update_bar();
+                }
+                up = false;
+                down = false;
+                left = false;
+                right = false;
+                up_direction_taken = false;
+                down_direction_taken = false;
+                right_direction_taken = false;
+                left_direction_taken = false;
+                up_num = 0;
+                down_num = 0;
+                right_num = 0;
+                left_num = 0;
+                directions_available = 0;
+            }
+
+            water_load.Dispose();
+            //Here is where the seed tile for each mountain range will go.
+            for (int i = 0; i < mountain_ranges; i++ )
+            {
+                x = rand.Next(0,width);
+                y = rand.Next(0,height);
+                while(positions[x,y] !=null)
+                {
+                    x = rand.Next(0, width);
+                    y = rand.Next(0,height);
+                }
+                positions[x, y] = new Land(2);
+                mountain_ranges_coordinates[i, 0] = x;
+                mountain_ranges_coordinates[i, 1] = y;
+                --mountains_left;
+            }
+            LoadForm mountain_load = new LoadForm(tiles_of_mountains-1,"Mountains");
+            while(mountains_left!=0)
+            {
+                next_tile_placed = rand.Next(0, mountain_ranges);
+                //checks to see if a mountain range can be created in the up direction.
+/*Changed the zero to one*/if (mountain_ranges_coordinates[next_tile_placed, 1] > 1)
+                {
+                    if (positions[mountain_ranges_coordinates[next_tile_placed, 0], mountain_ranges_coordinates[next_tile_placed, 1] - 1] == null)
+                    {
+                        up = true;
+                        //Console.Out.Writeline("Up location is possible at coordinates: " + mountain_ranges_coordinates[next_tile_placed, 0].ToString() + "," + (mountain_ranges_coordinates[next_tile_placed, 1] - 1).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: "+mountain_ranges_coordinates[next_tile_placed,0].ToString() +","+(mountain_ranges_coordinates[next_tile_placed,1]-1).ToString()+" invalid.  Spot already taken.");
+                        up_direction_taken = true;
+                    }
+                }
+                if (mountain_ranges_coordinates[next_tile_placed, 1] < height - 1)
+                {
+                    if (positions[mountain_ranges_coordinates[next_tile_placed, 0], mountain_ranges_coordinates[next_tile_placed, 1] + 1] == null)
+                    {
+                        down = true;
+                        //Console.Out.Writeline("Down location is possible at coordinates: " + mountain_ranges_coordinates[next_tile_placed, 0].ToString() + "," + (mountain_ranges_coordinates[next_tile_placed, 1] + 1).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + mountain_ranges_coordinates[next_tile_placed, 0].ToString() + "," + (mountain_ranges_coordinates[next_tile_placed, 1] + 1).ToString() + " invalid.  Spot already taken.");
+                        down_direction_taken = true;
+                    }
+                }
+/*Changed the zero to one*/if (mountain_ranges_coordinates[next_tile_placed, 0] > 1)
+                {
+                    if (positions[mountain_ranges_coordinates[next_tile_placed, 0] - 1, mountain_ranges_coordinates[next_tile_placed, 1]] == null)
+                    {
+                        left = true;
+                        //Console.Out.Writeline("Left location is possible at coordinates: " + (mountain_ranges_coordinates[next_tile_placed, 0]-1).ToString() + "," + (mountain_ranges_coordinates[next_tile_placed, 1]).ToString());
+                    }
+                    else
+                    {
+                     //   Console.Out.Writeline("Coordinates: " + (mountain_ranges_coordinates[next_tile_placed, 0]-1).ToString() + "," + mountain_ranges_coordinates[next_tile_placed, 1].ToString() + " invalid.  Spot already taken.");
+                        left_direction_taken = true;
+                    }
+                }
+                if (mountain_ranges_coordinates[next_tile_placed, 0] < width - 1)
+                {
+                    if (positions[mountain_ranges_coordinates[next_tile_placed, 0] + 1, mountain_ranges_coordinates[next_tile_placed, 1]] == null)
+                    {
+                        right = true;
+                        //Console.Out.Writeline("Right location is possible at coordinates: " + (mountain_ranges_coordinates[next_tile_placed, 0] + 1).ToString() + "," + (mountain_ranges_coordinates[next_tile_placed, 1]).ToString());
+
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + (mountain_ranges_coordinates[next_tile_placed, 0] + 1).ToString() + "," + mountain_ranges_coordinates[next_tile_placed, 1].ToString() + " invalid.  Spot already taken.");
+                        right_direction_taken = true;
+                    }
+                }
+                if (up == true)
+                {
+                    directions_available++;
+                    up_num = directions_available;
+                    //Console.Out.Writeline("up number is: "+up_num.ToString());
+                }
+                if (right == true)
+                {
+                    directions_available++;
+                    right_num = directions_available;
+                    //Console.Out.Writeline("right number is: "+right_num.ToString());
+                }
+                if (down == true)
+                {
+                    directions_available++;
+                    down_num = directions_available;
+                    //Console.Out.Writeline("down number is: "+down_num.ToString());
+                }
+                if (left == true)
+                {
+                    directions_available++;
+                    left_num = directions_available;
+                    //Console.Out.Writeline("left number is: "+ left_num.ToString());
+                }
+                if (up == false && down == false && left == false && right == false)
+                {
+                    //Console.Out.Writeline("All direction are unavailable.");
+                    directions_available = 0;
+                    up_num = 0;
+                    down_num = 0;
+                    right_num = 0;
+                    left_num = 0;
+                    if (up_direction_taken == true)
+                    {
+                        directions_available++;
+                        up_num = directions_available;
+                    }
+                    if (down_direction_taken == true)
+                    {
+                        directions_available++;
+                        down_num = directions_available;
+                    }
+                    if (left_direction_taken == true)
+                    {
+                        directions_available++;
+                        left_num = directions_available;
+                    }
+                    if (right_direction_taken == true)
+                    {
+                        directions_available++;
+                        right_num = directions_available;
+                    }
+                    direction_chosen_for_next_tile = rand2.Next(1, directions_available + 1);
+                    if (direction_chosen_for_next_tile == up_num)
+                    {
+                        mountain_ranges_coordinates[next_tile_placed, 1] = mountain_ranges_coordinates[next_tile_placed, 1] - 1;
+                    }
+                    if (direction_chosen_for_next_tile == down_num)
+                    {
+                        mountain_ranges_coordinates[next_tile_placed, 1] = mountain_ranges_coordinates[next_tile_placed, 1] + 1;
+                    }
+                    if (direction_chosen_for_next_tile == left_num)
+                    {
+                        mountain_ranges_coordinates[next_tile_placed, 0] = mountain_ranges_coordinates[next_tile_placed, 0] - 1;
+                    }
+                    if (direction_chosen_for_next_tile == right_num)
+                    {
+                        mountain_ranges_coordinates[next_tile_placed, 0] = mountain_ranges_coordinates[next_tile_placed, 0] + 1;
+                    }
+                }
+                else//This else was created in the event that all direction are unavilable, this will be skipped.
+                {
+                    //this block will make a randomly generated number with a valid direction and them assign that to the map.
+                    direction_chosen_for_next_tile = rand2.Next(1, directions_available + 1);
+                    //Console.Out.Writeline("Number chosen for dirention: " + direction_chosen_for_next_tile.ToString());
+                    if (direction_chosen_for_next_tile == up_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in up direction.");
+                        positions[mountain_ranges_coordinates[next_tile_placed, 0], mountain_ranges_coordinates[next_tile_placed, 1] - 1] = new Land(2);
+                        mountain_ranges_coordinates[next_tile_placed, 1] = mountain_ranges_coordinates[next_tile_placed, 1] - 1;
+                        --mountains_left;
+                        //Console.Out.Writeline(mountains_left.ToString() + " out of " + tiles_of_mountains.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == right_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in right direction.");
+                        positions[mountain_ranges_coordinates[next_tile_placed, 0] + 1, mountain_ranges_coordinates[next_tile_placed, 1]] = new Land(2);
+                        mountain_ranges_coordinates[next_tile_placed, 1] = mountain_ranges_coordinates[next_tile_placed, 0] + 1;
+                        --mountains_left;
+                        //Console.Out.Writeline(mountains_left.ToString() + " out of " + tiles_of_mountains.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == down_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in down direction.");
+                        positions[mountain_ranges_coordinates[next_tile_placed, 0], mountain_ranges_coordinates[next_tile_placed, 1] + 1] = new Land(2);
+                        mountain_ranges_coordinates[next_tile_placed, 1] = mountain_ranges_coordinates[next_tile_placed, 1] + 1;
+                        --mountains_left;
+                        //Console.Out.Writeline(mountains_left.ToString() + " out of " + tiles_of_mountains.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == left_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in left direction.");
+                        positions[mountain_ranges_coordinates[next_tile_placed, 0] - 1, mountain_ranges_coordinates[next_tile_placed, 1]] = new Land(2);
+                        mountain_ranges_coordinates[next_tile_placed, 1] = mountain_ranges_coordinates[next_tile_placed, 0] - 1;
+                        --mountains_left;
+                        //Console.Out.Writeline(mountains_left.ToString() + " out of " + tiles_of_mountains.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+
+                    mountain_load.update_bar();
+                }
+                up = false;
+                down = false;
+                left = false;
+                right = false;
+                up_direction_taken = false;
+                down_direction_taken = false;
+                right_direction_taken = false;
+                left_direction_taken = false;
+                up_num = 0;
+                down_num = 0;
+                right_num = 0;
+                left_num = 0;
+                directions_available = 0;
+            }
+
+
+            mountain_load.Dispose();
+            //Here is where the seed tile for each forest cluster will go.
+            for (int i = 0; i < clusters_of_forests; i++ )
+            {
+                x = rand.Next(0,width);
+                y = rand.Next(0,height);
+                while(positions[x,y]!=null)
+                {
+                    x = rand.Next(0,width);
+                    y = rand.Next(0,height);
+                }
+                positions[x, y] = new Land(4);
+                clusters_of_forests_coordinates[i, 0] = x;
+                clusters_of_forests_coordinates[i, 1] = y;
+                --forest_left;
+            }
+            LoadForm forest_load = new LoadForm(tiles_of_forest - 1, "Forests");
+            while (forest_left != 0)
+            {
+                next_tile_placed = rand.Next(0, clusters_of_forests);
+                if (clusters_of_forests_coordinates[next_tile_placed, 1] > 1)//switched this from a zero to a one.
+                {
+                    if (positions[clusters_of_forests_coordinates[next_tile_placed, 0], clusters_of_forests_coordinates[next_tile_placed, 1] - 1] == null)
+                    {
+                        up = true;
+                        //Console.Out.Writeline("Up location is possible at coordinates: " + clusters_of_forests_coordinates[next_tile_placed, 0].ToString() + "," + (clusters_of_forests_coordinates[next_tile_placed, 1] - 1).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: "+clusters_of_forests_coordinates[next_tile_placed,0].ToString() +","+(clusters_of_forests_coordinates[next_tile_placed,1]-1).ToString()+" invalid.  Spot already taken.");
+                        up_direction_taken = true;
+                    }
+                }
+                if (clusters_of_forests_coordinates[next_tile_placed, 1] < height - 1)
+                {
+                    if (positions[clusters_of_forests_coordinates[next_tile_placed, 0], clusters_of_forests_coordinates[next_tile_placed, 1] + 1] == null)
+                    {
+                        down = true;
+                        //Console.Out.Writeline("Down location is possible at coordinates: " + clusters_of_forests_coordinates[next_tile_placed, 0].ToString() + "," + (clusters_of_forests_coordinates[next_tile_placed, 1] + 1).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + clusters_of_forests_coordinates[next_tile_placed, 0].ToString() + "," + (clusters_of_forests_coordinates[next_tile_placed, 1] + 1).ToString() + " invalid.  Spot already taken.");
+                        down_direction_taken = true;
+                    }
+                }
+                if (clusters_of_forests_coordinates[next_tile_placed, 0] > 1)//switched from zero to one
+                {
+                    if (positions[clusters_of_forests_coordinates[next_tile_placed, 0] - 1, clusters_of_forests_coordinates[next_tile_placed, 1]] == null)
+                    {
+                        left = true;
+       //                 Console.Out.Writeline("Left location is possible at coordinates: " + (clusters_of_forests_coordinates[next_tile_placed, 0]-1).ToString() + "," + (clusters_of_forests_coordinates[next_tile_placed, 1]).ToString());
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + (clusters_of_forests_coordinates[next_tile_placed, 0]-1).ToString() + "," + clusters_of_forests_coordinates[next_tile_placed, 1].ToString() + " invalid.  Spot already taken.");
+                        left_direction_taken = true;
+                    }
+                }
+                if (clusters_of_forests_coordinates[next_tile_placed, 0] < width - 1)
+                {
+                    if (positions[clusters_of_forests_coordinates[next_tile_placed, 0] + 1, clusters_of_forests_coordinates[next_tile_placed, 1]] == null)
+                    {
+                        right = true;
+                       // Console.Out.Writeline("Right location is possible at coordinates: " + (clusters_of_forests_coordinates[next_tile_placed, 0] + 1).ToString() + "," + (clusters_of_forests_coordinates[next_tile_placed, 1]).ToString());
+
+                    }
+                    else
+                    {
+                        //Console.Out.Writeline("Coordinates: " + (clusters_of_forests_coordinates[next_tile_placed, 0] + 1).ToString() + "," + clusters_of_forests_coordinates[next_tile_placed, 1].ToString() + " invalid.  Spot already taken.");
+                        right_direction_taken = true;
+                    }
+                }
+                if (up == true)
+                {
+                    directions_available++;
+                    up_num = directions_available;
+                    //Console.Out.Writeline("up number is: "+up_num.ToString());
+                }
+                if (right == true)
+                {
+                    directions_available++;
+                    right_num = directions_available;
+                    //Console.Out.Writeline("right number is: "+right_num.ToString());
+                }
+                if (down == true)
+                {
+                    directions_available++;
+                    down_num = directions_available;
+                    //Console.Out.Writeline("down number is: "+down_num.ToString());
+                }
+                if (left == true)
+                {
+                    directions_available++;
+                    left_num = directions_available;
+                    //Console.Out.Writeline("left number is: "+ left_num.ToString());
+                }
+                if (up == false && down == false && left == false && right == false)
+                {
+                    //Console.Out.Writeline("All direction are unavailable.");
+                    directions_available = 0;
+                    up_num = 0;
+                    down_num = 0;
+                    right_num = 0;
+                    left_num = 0;
+                    if (up_direction_taken == true)
+                    {
+                        directions_available++;
+                        up_num = directions_available;
+                    }
+                    if (down_direction_taken == true)
+                    {
+                        directions_available++;
+                        down_num = directions_available;
+                    }
+                    if (left_direction_taken == true)
+                    {
+                        directions_available++;
+                        left_num = directions_available;
+                    }
+                    if (right_direction_taken == true)
+                    {
+                        directions_available++;
+                        right_num = directions_available;
+                    }
+                    direction_chosen_for_next_tile = rand2.Next(1, directions_available + 1);
+                    if (direction_chosen_for_next_tile == up_num)
+                    {
+                        clusters_of_forests_coordinates[next_tile_placed, 1] = clusters_of_forests_coordinates[next_tile_placed, 1] - 1;
+                    }
+                    if (direction_chosen_for_next_tile == down_num)
+                    {
+                        clusters_of_forests_coordinates[next_tile_placed, 1] = clusters_of_forests_coordinates[next_tile_placed, 1] + 1;
+                    }
+                    if (direction_chosen_for_next_tile == left_num)
+                    {
+                        clusters_of_forests_coordinates[next_tile_placed, 0] = clusters_of_forests_coordinates[next_tile_placed, 0] - 1;
+                    }
+                    if (direction_chosen_for_next_tile == right_num)
+                    {
+                        clusters_of_forests_coordinates[next_tile_placed, 0] = clusters_of_forests_coordinates[next_tile_placed, 0] + 1;
+                    }
+                }
+                else//This else was created in the event that all direction are unavilable, this will be skipped.
+                {
+                    //this block will make a randomly generated number with a valid direction and them assign that to the map.
+                    direction_chosen_for_next_tile = rand2.Next(1, directions_available + 1);
+                    //Console.Out.Writeline("Number chosen for dirention: " + direction_chosen_for_next_tile.ToString());
+                    if (direction_chosen_for_next_tile == up_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in up direction.");
+                        positions[clusters_of_forests_coordinates[next_tile_placed, 0], clusters_of_forests_coordinates[next_tile_placed, 1] - 1] = new Land(4);
+                        clusters_of_forests_coordinates[next_tile_placed, 1] = clusters_of_forests_coordinates[next_tile_placed, 1] - 1;
+                        --forest_left;
+                        //Console.Out.Writeline(forest_left.ToString() + " out of " + tiles_of_forest.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == right_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in right direction.");
+                        positions[clusters_of_forests_coordinates[next_tile_placed, 0] + 1, clusters_of_forests_coordinates[next_tile_placed, 1]] = new Land(4);
+                        clusters_of_forests_coordinates[next_tile_placed, 1] = clusters_of_forests_coordinates[next_tile_placed, 0] + 1;
+                        --forest_left;
+                        //Console.Out.Writeline(forest_left.ToString() + " out of " + tiles_of_forest.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == down_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in down direction.");
+                        positions[clusters_of_forests_coordinates[next_tile_placed, 0], clusters_of_forests_coordinates[next_tile_placed, 1] + 1] = new Land(4);
+                        clusters_of_forests_coordinates[next_tile_placed, 1] = clusters_of_forests_coordinates[next_tile_placed, 1] + 1;
+                        --forest_left;
+                        //Console.Out.Writeline(forest_left.ToString() + " out of " + tiles_of_forest.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else if (direction_chosen_for_next_tile == left_num)
+                    {
+                        //Console.Out.Writeline("Creating new tile in left direction.");
+                        positions[clusters_of_forests_coordinates[next_tile_placed, 0] - 1, clusters_of_forests_coordinates[next_tile_placed, 1]] = new Land(4);
+                        clusters_of_forests_coordinates[next_tile_placed, 1] = clusters_of_forests_coordinates[next_tile_placed, 0] - 1;
+                        --forest_left;
+                        //Console.Out.Writeline(water_left.ToString() + " out of " + tiles_of_water.ToString() + " tiles of water remaining.");//writig to console here.
+
+                    }
+                    else
+                    {
+
+                    }
+                    forest_load.update_bar();
+                }
+                up = false;
+                down = false;
+                left = false;
+                right = false;
+                up_direction_taken = false;
+                down_direction_taken = false;
+                right_direction_taken = false;
+                left_direction_taken = false;
+                up_num = 0;
+                down_num = 0;
+                right_num = 0;
+                left_num = 0;
+                directions_available = 0;
+            }
+
+            forest_load.Dispose();
+                //Each tile that does not have a land ID will be replaced with a plains.
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                    {
+                        if (positions[i, j] == null)
+                        {
+                            positions[i, j] = new Land(3);
+                        }
+                    }
+                }
+        }
+
+    

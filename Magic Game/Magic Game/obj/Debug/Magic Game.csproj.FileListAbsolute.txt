@@ -1,0 +1,95 @@
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\bin\Debug\Magic Game.exe.config
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\bin\Debug\Magic Game.exe
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\bin\Debug\Magic Game.pdb
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.Form1.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.Form2.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.Form3.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.LoadForm.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.Properties.Resources.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic Game.csproj.GenerateResource.Cache
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic Game.exe
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic Game.pdb
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic Game.csprojResolveAssemblyReference.cache
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.GetCoordinatesForm.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.FactionAddingForm.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.CityOptions.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.MovingArmyForm.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.BattleForm.resources
+C:\Users\Brandon\Documents\Visual Studio 2013\Projects\Magic Game\Magic Game\obj\Debug\Magic_Game.LoadChooseForm.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic Game.csprojResolveAssemblyReference.cache
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.BattleForm.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.CityOptions.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.FactionAddingForm.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.Form1.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.Form2.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.Form3.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.GetCoordinatesForm.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.LoadChooseForm.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.LoadForm.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.MovingArmyForm.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic_Game.Properties.Resources.resources
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic Game.csproj.GenerateResource.Cache
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic Game.csproj.CoreCompileInputs.cache
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic Game.exe
+C:\Users\Brandon Danielski\Desktop\Magic Game\obj\Debug\Magic Game.pdb
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic Game.csprojResolveAssemblyReference.cache
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.BattleForm.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.CityOptions.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.FactionAddingForm.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.Form1.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.Form2.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.Form3.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.GetCoordinatesForm.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.LoadChooseForm.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.LoadForm.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.MovingArmyForm.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic_Game.Properties.Resources.resources
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic Game.csproj.GenerateResource.Cache
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic Game.csproj.CoreCompileInputs.cache
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic Game.exe
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\obj\Debug\Magic Game.pdb
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\bin\Debug\Magic Game.exe.config
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\bin\Debug\Magic Game.exe
+C:\Users\Brandon Danielski\Documents\Visual Studio 2017\Magic Game\bin\Debug\Magic Game.pdb
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\bin\Debug\Magic Game.exe.config
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\bin\Debug\Magic Game.exe
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\bin\Debug\Magic Game.pdb
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.BattleForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.CityOptions.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.FactionAddingForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.Form1.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.Form2.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.Form3.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.GetCoordinatesForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.LoadChooseForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.LoadForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.MovingArmyForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.Properties.Resources.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic Game.csproj.GenerateResource.Cache
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic Game.csproj.CoreCompileInputs.cache
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic Game.exe
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic Game.pdb
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.TourneyForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic Game.csprojResolveAssemblyReference.cache
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\obj\Debug\Magic_Game.RoundFightForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\bin\Debug\Magic Game.exe.config
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\bin\Debug\Magic Game.exe
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\bin\Debug\Magic Game.pdb
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic Game.csprojAssemblyReference.cache
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.BattleForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.CityOptions.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.FactionAddingForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.Form1.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.Form2.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.Form3.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.GetCoordinatesForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.LoadChooseForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.LoadForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.MovingArmyForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.Properties.Resources.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.RoundFightForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic_Game.TourneyForm.resources
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic Game.csproj.GenerateResource.cache
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic Game.csproj.CoreCompileInputs.cache
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic Game.exe
+C:\Users\Brandon Danielski\source\repos\Magic Game\Magic Game\Magic Game\obj\Debug\Magic Game.pdb

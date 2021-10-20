@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03713290-49B8-4EB8-816D-291228D963CB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Magic_Game</RootNamespace>
+    <AssemblyName>Magic Game</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Army.cs" />
+    <Compile Include="BattleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BattleForm.Designer.cs">
+      <DependentUpon>BattleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs" />
+    <Compile Include="CityOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CityOptions.Designer.cs">
+      <DependentUpon>CityOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Faction.cs" />
+    <Compile Include="FactionAddingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FactionAddingForm.Designer.cs">
+      <DependentUpon>FactionAddingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GetCoordinatesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetCoordinatesForm.Designer.cs">
+      <DependentUpon>GetCoordinatesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Land.cs" />
+    <Compile Include="LoadChooseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadChooseForm.Designer.cs">
+      <DependentUpon>LoadChooseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadForm.Designer.cs">
+      <DependentUpon>LoadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Map.cs" />
+    <Compile Include="MovingArmyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovingArmyForm.Designer.cs">
+      <DependentUpon>MovingArmyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoundFightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoundFightForm.Designer.cs">
+      <DependentUpon>RoundFightForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TourneyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TourneyForm.Designer.cs">
+      <DependentUpon>TourneyForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BattleForm.resx">
+      <DependentUpon>BattleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CityOptions.resx">
+      <DependentUpon>CityOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FactionAddingForm.resx">
+      <DependentUpon>FactionAddingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetCoordinatesForm.resx">
+      <DependentUpon>GetCoordinatesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadChooseForm.resx">
+      <DependentUpon>LoadChooseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadForm.resx">
+      <DependentUpon>LoadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MovingArmyForm.resx">
+      <DependentUpon>MovingArmyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoundFightForm.resx">
+      <DependentUpon>RoundFightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TourneyForm.resx">
+      <DependentUpon>TourneyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Magic Game\Land Tiles\Forest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Magic Game\Land Tiles\Moutain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Magic Game\Land Tiles\Plains.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Magic Game\Land Tiles\water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Drohl-Tide_Sigil.jpg" />
+    <None Include="Resources\Glint-Leaf_Sigil.jpg" />
+    <None Include="Resources\Roxveard_Sigil.png" />
+    <None Include="Resources\Glint-Leaf Symbol.jpg" />
+    <None Include="Resources\tourney null.gif" />
+    <Content Include="TouneyInfo.txt" />
+    <Content Include="TurnFactionSave2.txt" />
+    <Content Include="TurnFactionSave3.txt" />
+    <None Include="bin\Magic Game\Highlight.png" />
+    <Content Include="ArmySave2.txt" />
+    <Content Include="ArmySave3.txt" />
+    <Content Include="CitySave2.txt" />
+    <Content Include="CitySave3.txt" />
+    <Content Include="FactionsInPlay.txt" />
+    <Content Include="FactionsInPlay2.txt" />
+    <Content Include="FactionsInPlay3.txt" />
+    <Content Include="MapSave2.txt" />
+    <Content Include="MapSave3.txt" />
+    <Content Include="Old land population.txt" />
+    <Content Include="TurnFactionSave.txt" />
+    <None Include="bin\Magic Game\Sigils\Auxilex Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Azorius Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Boros Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Dimir Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Drogskol Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Firefolk Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Golgari Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Gruul Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Howlpack_Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Hruktar Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Immutius Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Izzet Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Lex Imperium Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Nimium Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Orzhov Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Parcorium Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Phyrexian Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Rakdos Sigil.png" />
+    <None Include="bin\Magic Game\Sigils\Selesnya Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Simic Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Vallatus Sigil.jpg" />
+    <None Include="bin\Magic Game\Sigils\Zeplitor Sigil.jpg" />
+    <Content Include="ArmySave.txt" />
+    <Content Include="CitySave.txt" />
+    <Content Include="FactionSave.txt" />
+    <Content Include="Map_Generator_1.txt" />
+    <None Include="bin\Magic Game\Land Tiles\City.png" />
+    <None Include="bin\Magic Game\form1background.jpg" />
+    <None Include="bin\Magic Game\Land Tiles\City 2.png" />
+    <None Include="bin\Magic Game\Land Tiles\City 2dirt.png" />
+    <None Include="bin\Magic Game\Land Tiles\city.jpg" />
+    <Content Include="bin\Notes.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

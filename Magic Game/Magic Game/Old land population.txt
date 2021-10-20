@@ -1,0 +1,323 @@
+﻿            if(new_game==true)//Basically inquires if the winner's bracket is empty(new game), or full(completed winners bracket of a new game).
+            {
+                for(int i=0; i < Faction_list.Count;i++)
+                {
+                    winners_bracket.Add(Faction_list[i]);
+                }
+            }
+
+            List<int> ids_left = new List<int>();
+            Random rnd = new Random();
+            int chosen_index = 0;
+            #region populate_ids_left
+            for (int i = 0; i < Faction_list.Count; i++)
+            {
+                ids_left.Add(Faction_list[i].get_ID());
+            }
+            #endregion
+            #region populate_baccket
+            while (ids_left.Count > 0)
+            {
+                chosen_index = rnd.Next(0, ids_left.Count - 1);//Gets an element to take from the ids left list.
+                MessageBox.Show("ID chosen: " + (chosen_index + 1));
+
+                for (int i = 0; i < Faction_list.Count; i++)//Adds that elements to the  pairings for the tournament.
+                {
+                    if (ids_left[chosen_index] == Faction_list[i].get_ID())
+                    {
+                        MessageBox.Show("ID Found: " + ids_left[chosen_index] + " and " + Faction_list[i].get_ID() + ". " + Faction_list[i].get_name());
+                        for (int j = 0; j < Faction_list.Count / 2 + 1; j++)
+                        {
+                            if (pairs[j, 0] == null)
+                            {
+                                MessageBox.Show("Placed in pair position: " + j + "," + 0);
+                                pairs[j, 0] = Faction_list[i];
+                                break;
+                            }
+                            else if (pairs[j, 1] == null)
+                            {
+                                MessageBox.Show("Placed in pair position: " + j + "," + 1);
+                                pairs[j, 1] = Faction_list[i];
+                                break;
+                            }
+                        }
+                        ids_left.RemoveAt(chosen_index);
+                        MessageBox.Show("Elements left: " + ids_left.Count);
+                        break;
+                    }
+                    if (ids_left[chosen_index] != Faction_list[i].get_ID() && i >= Faction_list.Count)
+                    {
+                        MessageBox.Show("ID: " + i + " is not on the list of ID's.");
+                    }
+                }
+            }
+            MessageBox.Show("Everyone has been paired.");
+            for (int i = 0; i < (Faction_list.Count / 2) + 1; i++)
+            {
+                if (pairs[i, 0] != null && pairs[i, 1] != null)
+                {
+                    MessageBox.Show((i + 1) + ". " + pairs[i, 0].get_name() + " and " + pairs[i, 1].get_name());
+                }
+                else if (pairs[i, 0] != null && pairs[i, 1] == null)
+                {
+                    MessageBox.Show(pairs[i, 0].get_name() + " has no partner.");
+                }
+                else if (pairs[i, 0] == null && pairs[i, 1] == null)
+                {
+                    MessageBox.Show("Error: empty set.");
+                }
+                else
+                {
+                    MessageBox.Show("Man, I don't even know, I'm going to bed.");
+                }
+            }
+            #endregion
+            #region add_sprites to map
+            Image Auxilex = (Image)(new Bitmap(Properties.Resources.Auxilex_Sigil, new Size(50, 50)));
+            Image Azorius = (Image)(new Bitmap(Properties.Resources.Azorius_Sigil, new Size(50, 50)));
+            Image Boros = (Image)(new Bitmap(Properties.Resources.Boros_Sigil, new Size(50, 50)));
+            Image Dimir = (Image)(new Bitmap(Properties.Resources.Dimir_Sigil, new Size(50, 50)));
+            Image Drogskol = (Image)(new Bitmap(Properties.Resources.Drogskol_Sigil, new Size(50, 50)));
+            Image Drohl_Tide = (Image)(new Bitmap(Properties.Resources.Drohl_Tide_Sigil, new Size(50, 50)));
+            Image Firefolk = (Image)(new Bitmap(Properties.Resources.Firefolk_Sigil, new Size(50, 50)));
+            Image Glint_Leaf = (Image)(new Bitmap(Properties.Resources.Glint_Leaf_Symbol, new Size(50, 50)));
+            Image Golgari = (Image)(new Bitmap(Properties.Resources.Golgari_Sigil, new Size(50, 50)));
+            Image Gruul = (Image)(new Bitmap(Properties.Resources.Gruul_Sigil, new Size(50, 50)));
+            Image Howlpack = (Image)(new Bitmap(Properties.Resources.Howlpack_Sigil, new Size(50, 50)));
+            Image Hruktar = (Image)(new Bitmap(Properties.Resources.Hruktar_Sigil, new Size(50, 50)));
+            Image Immurtius = (Image)(new Bitmap(Properties.Resources.Immutius_Sigil, new Size(50, 50)));
+            Image Izzet = (Image)(new Bitmap(Properties.Resources.Izzet_Sigil, new Size(50, 50)));
+            Image Lex_Imperium = (Image)(new Bitmap(Properties.Resources.Lex_Imperium_Sigil, new Size(50, 50)));
+            Image Nimium = (Image)(new Bitmap(Properties.Resources.Nimium_Sigil, new Size(50, 50)));
+            Image Orzhov = (Image)(new Bitmap(Properties.Resources.Orzhov_Sigil, new Size(50, 50)));
+            Image Parcorium = (Image)(new Bitmap(Properties.Resources.Parcorium_Sigil, new Size(50, 50)));
+            Image Phyrexian = (Image)(new Bitmap(Properties.Resources.Phyrexian_Sigil, new Size(50, 50)));
+            Image Rakdos = (Image)(new Bitmap(Properties.Resources.Rakdos_Sigil, new Size(50, 50)));
+            Image Roxveard = (Image)(new Bitmap(Properties.Resources.Roxveard_Sigil, new Size(50, 50)));
+            Image Selesnya = (Image)(new Bitmap(Properties.Resources.Selesnya_Sigil, new Size(50, 50)));
+            Image Simic = (Image)(new Bitmap(Properties.Resources.Simic_Sigil, new Size(50, 50)));
+            Image Vallatus = (Image)(new Bitmap(Properties.Resources.Vallatus_Sigil, new Size(50, 50)));
+            Image Zeplitor = (Image)(new Bitmap(Properties.Resources.Zeplitor_Sigil, new Size(50, 50)));
+            Image null_symbol = (Image)(new Bitmap(Properties.Resources.tourney_null, new Size(50, 50)));
+            Bitmap match_ups = new Bitmap(50, (50 * Faction_list.Count));
+            Graphics g = Graphics.FromImage(match_ups);
+
+            for (int i = 0; i < (Faction_list.Count / 2 + 1); i++)
+            {
+                #region choosing_zero_element
+                if (pairs[i, 0].get_ID() == 1)
+                {
+                    g.DrawImage(Auxilex, 20, 20);
+                }
+                else if (pairs[i, 0].get_ID() == 2)
+                {
+                    g.DrawImage(Azorius, 20, 40);
+                }
+                else if (pairs[i, 0].get_ID() == 3)
+                {
+                    g.DrawImage(Boros, 20, 60);
+                }
+                else if (pairs[i, 0].get_ID() == 4)
+                {
+                    g.DrawImage(Dimir, 20, 80);
+                }
+                else if (pairs[i, 0].get_ID() == 5)
+                {
+                    g.DrawImage(Drogskol, 20, 100);
+                }
+                else if (pairs[i, 0].get_ID() == 6)
+                {
+                    g.DrawImage(Drohl_Tide, 20, 120);
+                }
+                else if (pairs[i, 0].get_ID() == 7)
+                {
+                    g.DrawImage(Firefolk, 20, 140);
+                }
+                else if (pairs[i, 0].get_ID() == 8)
+                {
+                    g.DrawImage(Glint_Leaf, 20, 160);
+                }
+                else if (pairs[i, 0].get_ID() == 9)
+                {
+                    g.DrawImage(Golgari, 20, 180);
+                }
+                else if (pairs[i, 0].get_ID() == 10)
+                {
+                    g.DrawImage(Gruul, 20, 200);
+                }
+                else if (pairs[i, 0].get_ID() == 11)
+                {
+                    g.DrawImage(Howlpack, 20, 220);
+                }
+                else if (pairs[i, 0].get_ID() == 12)
+                {
+                    g.DrawImage(Hruktar, 20, 240);
+                }
+                else if (pairs[i, 0].get_ID() == 13)
+                {
+                    g.DrawImage(Immurtius, 20, 260);
+                }
+                else if (pairs[i, 0].get_ID() == 14)
+                {
+                    g.DrawImage(Izzet, 20, 280);
+                }
+                else if (pairs[i, 0].get_ID() == 15)
+                {
+                    g.DrawImage(Lex_Imperium, 20, 300);
+                }
+                else if (pairs[i, 0].get_ID() == 16)
+                {
+                    g.DrawImage(Nimium, 20, 320);
+                }
+                else if (pairs[i, 0].get_ID() == 17)
+                {
+                    g.DrawImage(Orzhov, 20, 340);
+                }
+                else if (pairs[i, 0].get_ID() == 18)
+                {
+                    g.DrawImage(Parcorium, 20, 360);
+                }
+                else if (pairs[i, 0].get_ID() == 19)
+                {
+                    g.DrawImage(Phyrexian, 20, 380);
+                }
+                else if (pairs[i, 0].get_ID() == 20)
+                {
+                    g.DrawImage(Rakdos, 20, 400);
+                }
+                else if (pairs[i, 0].get_ID() == 21)
+                {
+                    g.DrawImage(Roxveard, 20, 420);
+                }
+                else if (pairs[i, 0].get_ID() == 22)
+                {
+                    g.DrawImage(Selesnya, 20, 440);
+                }
+                else if (pairs[i, 0].get_ID() == 23)
+                {
+                    g.DrawImage(Simic, 20, 460);
+                }
+                else if (pairs[i, 0].get_ID() == 24)
+                {
+                    g.DrawImage(Vallatus, 20, 480);
+                }
+                else if (pairs[i, 0].get_ID() == 25)
+                {
+                    g.DrawImage(Zeplitor, 20, 500);
+                }
+                #endregion
+                #region choosing_first_element
+                if (pairs[i, 1] == null)
+                {
+                    g.DrawImage(null_symbol, 20, (20 * i));
+                }
+                else if (pairs[i, 1].get_ID() == 1)
+                {
+                    g.DrawImage(Auxilex, 20, 20);
+                }
+                else if (pairs[i, 1].get_ID() == 2)
+                {
+                    g.DrawImage(Azorius, 20, 40);
+                }
+                else if (pairs[i, 1].get_ID() == 3)
+                {
+                    g.DrawImage(Boros, 20, 60);
+                }
+                else if (pairs[i, 1].get_ID() == 4)
+                {
+                    g.DrawImage(Dimir, 20, 80);
+                }
+                else if (pairs[i, 1].get_ID() == 5)
+                {
+                    g.DrawImage(Drogskol, 20, 100);
+                }
+                else if (pairs[i, 1].get_ID() == 6)
+                {
+                    g.DrawImage(Drohl_Tide, 20, 120);
+                }
+                else if (pairs[i, 1].get_ID() == 7)
+                {
+                    g.DrawImage(Firefolk, 20, 140);
+                }
+                else if (pairs[i, 1].get_ID() == 8)
+                {
+                    g.DrawImage(Glint_Leaf, 20, 160);
+                }
+                else if (pairs[i, 1].get_ID() == 9)
+                {
+                    g.DrawImage(Golgari, 20, 180);
+                }
+                else if (pairs[i, 1].get_ID() == 10)
+                {
+                    g.DrawImage(Gruul, 20, 200);
+                }
+                else if (pairs[i, 1].get_ID() == 11)
+                {
+                    g.DrawImage(Howlpack, 20, 220);
+                }
+                else if (pairs[i, 1].get_ID() == 12)
+                {
+                    g.DrawImage(Hruktar, 20, 240);
+                }
+                else if (pairs[i, 1].get_ID() == 13)
+                {
+                    g.DrawImage(Immurtius, 20, 260);
+                }
+                else if (pairs[i, 1].get_ID() == 14)
+                {
+                    g.DrawImage(Izzet, 20, 280);
+                }
+                else if (pairs[i, 1].get_ID() == 15)
+                {
+                    g.DrawImage(Lex_Imperium, 20, 300);
+                }
+                else if (pairs[i, 1].get_ID() == 16)
+                {
+                    g.DrawImage(Nimium, 20, 320);
+                }
+                else if (pairs[i, 1].get_ID() == 17)
+                {
+                    g.DrawImage(Orzhov, 20, 340);
+                }
+                else if (pairs[i, 1].get_ID() == 18)
+                {
+                    g.DrawImage(Parcorium, 20, 360);
+                }
+                else if (pairs[i, 1].get_ID() == 19)
+                {
+                    g.DrawImage(Phyrexian, 20, 380);
+                }
+                else if (pairs[i, 1].get_ID() == 20)
+                {
+                    g.DrawImage(Rakdos, 20, 400);
+                }
+                else if (pairs[i, 1].get_ID() == 21)
+                {
+                    g.DrawImage(Roxveard, 20, 420);
+                }
+                else if (pairs[i, 1].get_ID() == 22)
+                {
+                    g.DrawImage(Selesnya, 20, 440);
+                }
+                else if (pairs[i, 1].get_ID() == 23)
+                {
+                    g.DrawImage(Simic, 20, 460);
+                }
+                else if (pairs[i, 1].get_ID() == 24)
+                {
+                    g.DrawImage(Vallatus, 20, 480);
+                }
+                else if (pairs[i, 1].get_ID() == 25)
+                {
+                    g.DrawImage(Zeplitor, 20, 500);
+                }
+                #endregion
+            }
+            match_ups.Save("match_ups", System.Drawing.Imaging.ImageFormat.Jpeg);
+            PictureBox new_round = new PictureBox();
+            new_round.Image = match_ups;
+            new_round.ClientSize = new Size(50, (50 * Faction_list.Count));
+            new_round.Location = new System.Drawing.Point(20, 20);
+            this.Controls.Add(new_round);
+            new_round.Show();
+            #endregion
